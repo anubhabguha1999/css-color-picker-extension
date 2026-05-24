@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChromaLux Color Picker</title>
+  <!-- Google Font: Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body class="dark-theme">
+  
+  <!-- Outer Extension Container -->
+  <div class="app-container">
+    
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="brand">
+        <span class="logo-glow"></span>
+        <h1>ChromaLux</h1>
+      </div>
+      
+      <div class="header-actions">
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="icon-btn" title="Toggle Theme" aria-label="Toggle Theme">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="app-content">
+      
+      <!-- ==================== TAB 1: PICKER ==================== -->
+      <section id="tab-picker" class="tab-panel active">
+        <!-- Active Color Display Card -->
+        <div class="active-color-card">
+          <div class="card-glow" id="card-glow"></div>
+          <div class="color-preview-container">
+            <div id="color-preview-badge" class="color-preview-badge">
+              <span class="preview-inner-glow"></span>
+            </div>
+          </div>
+          
+          <div class="color-quick-info">
+            <span class="color-title" id="color-name-label">Picked Color</span>
+            <span class="color-hex-large" id="color-hex-large">#6366F1</span>
+          </div>
+
+          <button id="pick-btn" class="pick-action-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m2 22 1-1c.6-.6.6-1.6 0-2.2L12 10"/><path d="M11 3 3 11"/><path d="m14 8 2 2"/><path d="M17 3a2.85 2.83 0 1 1 4 4L9 19l-4 1 1-4Z"/></svg>
+            <span>Pick Color</span>
+          </button>
+        </div>
+
+        <!-- Color Value Formats List -->
+        <div class="formats-list">
+          <!-- HEX -->
+          <div class="format-card" data-format="hex">
+            <span class="format-label">HEX</span>
+            <input type="text" id="format-hex" class="format-input" readonly value="#6366F1">
+            <button class="copy-btn" title="Copy HEX">
+              <svg class="copy-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+              <svg class="check-svg hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </button>
+          </div>
+          
+          <!-- RGB -->
+          <div class="format-card" data-format="rgb">
+            <span class="format-label">RGB</span>
+            <input type="text" id="format-rgb" class="format-input" readonly value="rgb(99, 102, 241)">
+            <button class="copy-btn" title="Copy RGB">
+              <svg class="copy-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+              <svg class="check-svg hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </button>
+          </div>
+
+          <!-- HSL -->
+          <div class="format-card" data-format="hsl">
+            <span class="format-label">HSL</span>
+            <input type="text" id="format-hsl" class="format-input" readonly value="hsl(239, 84%, 67%)">
+            <button class="copy-btn" title="Copy HSL">
+              <svg class="copy-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+              <svg class="check-svg hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </button>
+          </div>
+
+          <!-- OKLCH -->
+          <div class="format-card" data-format="oklch">
+            <span class="format-label">OKLCH</span>
+            <input type="text" id="format-oklch" class="format-input" readonly value="oklch(0.58 0.22 268)">
+            <button class="copy-btn" title="Copy OKLCH">
+              <svg class="copy-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+              <svg class="check-svg hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Shades & Tints Section -->
+        <div class="palette-group">
+          <div class="section-title-bar">
+            <h2>Shades & Tints</h2>
+            <span class="helper-text">Click swatch to select</span>
+          </div>
+          <div class="swatches-row" id="tints-shades-row">
+            <!-- Dynamic swatches generated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 2: HARMONIES ==================== -->
+      <section id="tab-harmonies" class="tab-panel">
+        <div class="section-desc">Color harmonies based on your selected color</div>
+        
+        <div class="harmonies-container">
+          <!-- Complementary -->
+          <div class="harmony-box">
+            <div class="harmony-header">
+              <h3>Complementary</h3>
+              <span class="harmony-formula">180° opposite</span>
+            </div>
+            <div class="harmony-row" id="harmony-complementary">
+              <!-- JS Injected -->
+            </div>
+          </div>
+
+          <!-- Analogous -->
+          <div class="harmony-box">
+            <div class="harmony-header">
+              <h3>Analogous</h3>
+              <span class="harmony-formula">±30° offset</span>
+            </div>
+            <div class="harmony-row" id="harmony-analogous">
+              <!-- JS Injected -->
+            </div>
+          </div>
+
+          <!-- Triadic -->
+          <div class="harmony-box">
+            <div class="harmony-header">
+              <h3>Triadic</h3>
+              <span class="harmony-formula">120° offsets</span>
+            </div>
+            <div class="harmony-row" id="harmony-triadic">
+              <!-- JS Injected -->
+            </div>
+          </div>
+
+          <!-- Monochromatic -->
+          <div class="harmony-box">
+            <div class="harmony-header">
+              <h3>Split-Complementary</h3>
+              <span class="harmony-formula">±150° offsets</span>
+            </div>
+            <div class="harmony-row" id="harmony-split">
+              <!-- JS Injected -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 3: CONTRAST ==================== -->
+      <section id="tab-contrast" class="tab-panel">
+        <div class="section-desc">Accessibility contrast analyzer against WCAG 2.1</div>
+
+        <!-- Tester Preview Box -->
+        <div class="contrast-tester" id="contrast-preview-card">
+          <div class="contrast-preview-text" id="contrast-preview-text">
+            <h4>Sample Heading</h4>
+            <p>This is a live preview of how readable your picked color is as text over the selected background color.</p>
+          </div>
+        </div>
+
+        <!-- Custom Background Selector -->
+        <div class="bg-selector-panel">
+          <span class="bg-label">Contrast Against:</span>
+          <div class="bg-options">
+            <button class="bg-opt-btn active" id="bg-opt-dark" data-bg="#1E293B">
+              <span class="swatch" style="background-color: #1E293B; border: 1px solid rgba(255,255,255,0.1)"></span>
+              <span>Dark</span>
+            </button>
+            <button class="bg-opt-btn" id="bg-opt-light" data-bg="#F8FAFC">
+              <span class="swatch" style="background-color: #F8FAFC; border: 1px solid rgba(0,0,0,0.1)"></span>
+              <span>Light</span>
+            </button>
+            <div class="bg-opt-btn custom-color-picker-opt">
+              <span class="swatch" id="custom-bg-indicator" style="background-color: #000000;"></span>
+              <input type="color" id="contrast-custom-bg" value="#000000">
+              <span>Custom</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contrast Results -->
+        <div class="contrast-results-card">
+          <div class="contrast-score-row">
+            <span class="score-label">Contrast Ratio</span>
+            <span class="score-value" id="contrast-ratio-value">4.5:1</span>
+          </div>
+
+          <div class="contrast-rules">
+            <!-- Normal Text -->
+            <div class="rule-card" id="rule-normal">
+              <div class="rule-meta">
+                <span class="rule-name">Normal Text (< 18pt)</span>
+                <span class="req-desc">Requires 4.5:1 for AA, 7.0:1 for AAA</span>
+              </div>
+              <div class="rule-badges">
+                <span class="badge aa-badge" id="badge-normal-aa">AA</span>
+                <span class="badge aaa-badge" id="badge-normal-aaa">AAA</span>
+              </div>
+            </div>
+
+            <!-- Large Text -->
+            <div class="rule-card" id="rule-large">
+              <div class="rule-meta">
+                <span class="rule-name">Large Text (≥ 18pt)</span>
+                <span class="req-desc">Requires 3.0:1 for AA, 4.5:1 for AAA</span>
+              </div>
+              <div class="rule-badges">
+                <span class="badge aa-badge" id="badge-large-aa">AA</span>
+                <span class="badge aaa-badge" id="badge-large-aaa">AAA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 4: HISTORY ==================== -->
+      <section id="tab-history" class="tab-panel">
+        <div class="history-actions-bar">
+          <span class="history-count" id="history-count">0 colors saved</span>
+          <button id="clear-history-btn" class="text-action-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+            <span>Clear All</span>
+          </button>
+        </div>
+
+        <!-- History Grid -->
+        <div class="history-scroll-container">
+          <div class="history-grid" id="history-grid">
+            <!-- Dynamic swatches generated by JS -->
+            <div class="no-history-msg" id="no-history-msg">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <p>No picked colors yet.</p>
+              <p class="sub">Colors you pick will appear here.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="app-navbar">
+      <button class="nav-item active" data-tab="picker" aria-label="Picker Tab">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 22 1-1c.6-.6.6-1.6 0-2.2L12 10"/><path d="M11 3 3 11"/><path d="m14 8 2 2"/><path d="M17 3a2.85 2.83 0 1 1 4 4L9 19l-4 1 1-4Z"/></svg>
+        <span>Picker</span>
+      </button>
+
+      <button class="nav-item" data-tab="harmonies" aria-label="Harmonies Tab">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 14.7255 3.09032 17.1962 4.85857 19C5.35857 19.5 5.5 20 5.5 20.5C5.5 21 5 21.5 4.5 21.5C4 21.5 3 21 2.5 20C1.5 18 1 15 1 12C1 5.92487 5.92487 1 12 1C18.0751 1 23 5.92487 23 12C23 18.0751 18.0751 23 12 23C10.5 23 9.5 22 9.5 21C9.5 20 10 19.5 10.5 19.5C11 19.5 11.5 20 12 20C12.5 20 13 19.5 13 19C13 18.5 12.5 18 12 18C10.5 18 9 19 9 20.5C9 21.5 10 22 12 22Z"/><circle cx="7.5" cy="10.5" r="1.5" fill="currentColor"/><circle cx="11.5" cy="7.5" r="1.5" fill="currentColor"/><circle cx="16.5" cy="9.5" r="1.5" fill="currentColor"/><circle cx="15.5" cy="14.5" r="1.5" fill="currentColor"/></svg>
+        <span>Palette</span>
+      </button>
+
+      <button class="nav-item" data-tab="contrast" aria-label="Contrast Tab">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10z"/><path d="M12 2v20"/></svg>
+        <span>Contrast</span>
+      </button>
+
+      <button class="nav-item" data-tab="history" aria-label="History Tab">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><polyline points="3 3 3 8 8 8"/><line x1="12" y1="7" x2="12" y2="12"/><line x1="12" y1="12" x2="16" y2="14"/></svg>
+        <span>History</span>
+      </button>
+    </nav>
+
+    <!-- Floating Global Toast Message -->
+    <div id="toast" class="toast hidden">Copied to clipboard!</div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

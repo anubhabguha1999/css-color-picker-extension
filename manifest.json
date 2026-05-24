@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "ChromaLux - CSS Color Picker",
+  "version": "1.0.0",
+  "description": "A premium, state-of-the-art CSS color picker with live eyedropper, WCAG contrast checker, shade/tint generator, and harmony palettes.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
